@@ -9,8 +9,17 @@ const displayPhone = phones => {
     const phoneContainer = document.getElementById('phone-container');
     phoneContainer.innerHTML = '';
 
-    // Sliced Phones number:
-    phones = phones.slice(0,3)
+    const showBtn = document.getElementById('showbtn');
+  
+    if(phones.length > 9){
+      showBtn.classList.remove('hidden')
+    }
+    else{
+      showBtn.classList.add('hidden');
+    }
+
+    // Sliced Phones number: Display first 5 phone
+    phones = phones.slice(0,10);
 
     phones.forEach(phone =>{
         // 2. Create a div
@@ -19,11 +28,11 @@ const displayPhone = phones => {
         phoneCard.innerHTML =  `
         <figure><img src="${phone.image}" alt="Shoes" /></figure>
         <div class="card-body flex flex-col items-center">
-          <h2 class="card-title">${phone.phone_name}</h2>
-          <p class="text-center">There are many variations of passages of available, but the majority have suffered</p>
-          <div class="card-actions justify-end">
+            <h2 class="card-title">${phone.phone_name}</h2>
+            <p class="text-center">There are many variations of passages of available, but the majority have suffered</p>
+            <div class="card-actions justify-end">
             <button class="btn btn-primary bg-blue-500 text-white">Show Details</button>
-          </div>
+        </div>
         `;
         phoneContainer.appendChild(phoneCard);
         
@@ -49,11 +58,5 @@ document.addEventListener('DOMContentLoaded', function(){
     loadPhone(findPhone)
   }
 })
-
-// document.getElementById('search').addEventListener('click', function(){
-//   const searchedPhone = document.getElementById('phone-name');
-//   const findPhone = searchedPhone.value;
-//   loadPhone(findPhone)
-// })
 
 loadPhone('iphone')

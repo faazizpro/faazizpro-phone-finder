@@ -1,5 +1,5 @@
-const loadPhone = async() => {
-    const res = await fetch('https://openapi.programming-hero.com/api/phones?search=iphone');
+const loadPhone = async(getPhone) => {
+    const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${getPhone}`);
     const data = await res.json();
     const phones = data.data;
     displayPhone(phones)
@@ -7,8 +7,8 @@ const loadPhone = async() => {
 
 const displayPhone = phones => {
     const phoneContainer = document.getElementById('phone-container');
+    phoneContainer.innerHTML = '';
     phones.forEach(phone =>{
-        console.log(phone);
         // 2. Create a div
         const phoneCard = document.createElement('div');
         phoneCard.classList = `card max-w-96 mx-auto bg-base-100 shadow-2xl p-5`;
@@ -22,9 +22,34 @@ const displayPhone = phones => {
           </div>
         `;
         phoneContainer.appendChild(phoneCard);
+        
     })
 };
 
+document.addEventListener('DOMContentLoaded', function(){
+  const searchedPhone = document.getElementById('phone-name');
+  const searchedButton = document.getElementById('search');
 
+  searchedPhone.addEventListener('keypress', function(event){
+    if(event.key === 'Enter'){
+      performSearch();
+    }
+  });
 
-loadPhone()
+  searchedButton.addEventListener('click', function(){
+    performSearch();
+  });
+
+  function performSearch(){
+    const findPhone = searchedPhone.value;
+    loadPhone(findPhone)
+  }
+})
+
+// document.getElementById('search').addEventListener('click', function(){
+//   const searchedPhone = document.getElementById('phone-name');
+//   const findPhone = searchedPhone.value;
+//   loadPhone(findPhone)
+// })
+
+loadPhone('iphone')

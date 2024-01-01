@@ -8,6 +8,10 @@ const loadPhone = async(getPhone) => {
 const displayPhone = phones => {
     const phoneContainer = document.getElementById('phone-container');
     phoneContainer.innerHTML = '';
+
+    // Sliced Phones number:
+    phones = phones.slice(0,3)
+
     phones.forEach(phone =>{
         // 2. Create a div
         const phoneCard = document.createElement('div');

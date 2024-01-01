@@ -23,7 +23,8 @@ const displayPhone = phones => {
         `;
         phoneContainer.appendChild(phoneCard);
     })
+};
 
-}
+
 
 loadPhone()

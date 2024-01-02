@@ -8,7 +8,7 @@ const loadPhone = async(getPhone) => {
 const displayPhone = phones => {
     const phoneContainer = document.getElementById('phone-container');
     phoneContainer.innerHTML = '';
-
+    
     const showBtn = document.getElementById('showbtn');
   
     if(phones.length > 9){
@@ -36,7 +36,10 @@ const displayPhone = phones => {
         `;
         phoneContainer.appendChild(phoneCard);
         
-    })
+    });
+
+    // Hide Loader:
+    toggleLoading(false);
 };
 
 document.addEventListener('DOMContentLoaded', function(){
@@ -49,9 +52,13 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   });
 
-  searchedButton.addEventListener('click', function(){
-    performSearch();
-  });
+    searchedButton.addEventListener('click', function(){
+      toggleLoading(true);
+      performSearch();
+    });
+
+
+
 
   function performSearch(){
     const findPhone = searchedPhone.value;
@@ -59,4 +66,19 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 })
 
-loadPhone('iphone')
+
+const toggleLoading = (isLoading) =>{
+  const toggle = document.getElementById('loader');
+  if(isLoading){
+    toggle.classList.remove('hidden');
+  }
+  else{
+    toggle.classList.add('hidden');
+  }
+}
+
+const handleShowAll = () =>{
+  
+}
+
+loadPhone()
